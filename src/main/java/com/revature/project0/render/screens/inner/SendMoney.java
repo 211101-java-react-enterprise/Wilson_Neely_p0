@@ -1,12 +1,13 @@
 package com.revature.project0.render.screens.inner;
 
 import com.revature.project0.render.screens.View;
+import com.revature.project0.util.ScreenRouter;
 
 import java.util.Scanner;
 
 public class SendMoney extends View {
-    public SendMoney(String name, String route, Scanner consoleScanner) {
-        super(name, route, consoleScanner);
+    public SendMoney(Scanner consoleScanner, ScreenRouter router) {
+        super("sendmoney", "loggedin/sendmoney", consoleScanner, router);
     }
 
     @Override

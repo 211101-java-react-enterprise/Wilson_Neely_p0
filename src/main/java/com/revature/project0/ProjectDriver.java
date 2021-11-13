@@ -1,7 +1,10 @@
 package com.revature.project0;
 
+import com.revature.project0.util.AppStatus;
+
 public class ProjectDriver {
     public static void main(String[] args) {
-        System.out.println("DEBUG: Testing...");
+        AppStatus app = new AppStatus();
+        app.start();
     }
 }

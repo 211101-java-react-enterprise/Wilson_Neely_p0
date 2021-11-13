@@ -28,10 +28,10 @@ public class ConnectionFactory {
     }
 
     private static final ConnectionFactory connectionFactory = new ConnectionFactory();
-    private Properties props = new Properties();
+    private final Properties props = new Properties();
     private ConnectionFactory(){
         try {
-            props.load(new FileReader("resources/DB.properties"));
+            props.load(new FileReader("Resource/DB.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,6 +1,7 @@
 package com.revature.project0.util;
 
 import com.revature.project0.render.screens.View;
+import com.revature.project0.util.Collections.LinkedList;
 
 public class ScreenRouter {
 
@@ -16,7 +17,6 @@ public class ScreenRouter {
 
     public void navigate(String route) throws Exception{
 
-        System.out.println("DEBUG, screen size: " + screens.size());
         View thisScreen;
         for (int i = 0; i < screens.size(); i++){
             thisScreen = screens.get(i);

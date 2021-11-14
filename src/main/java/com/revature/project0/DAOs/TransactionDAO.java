@@ -1,7 +1,7 @@
 package com.revature.project0.DAOs;
 
 import com.revature.project0.models.Transactions;
-import com.revature.project0.util.List;
+import com.revature.project0.util.Collections.List;
 
 public class TransactionDAO implements CrudDAO<Transactions>{
     @Override

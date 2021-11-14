@@ -1,4 +1,4 @@
-package com.revature.project0.util;
+package com.revature.project0.util.Collections;
 
 
 public interface List<T> extends Collection<T> {

@@ -27,7 +27,7 @@ public class Login extends View {
         System.out.println();
 
         try {
-            usersService.authenticateUser(username, password);
+            usersService.authenticate(username, password);
             router.navigate("/dashboard");
         } catch (InvalidRequestException | AuthenticationException e) {
             //TODO logging

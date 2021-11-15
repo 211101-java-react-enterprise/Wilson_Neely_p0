@@ -11,7 +11,6 @@ public class TransactionsService implements DataService<Transactions>{
         transDAO = DAO;
     }
 
-    @Override
     public Transactions authenticate(Transactions Obj) {
         return null;
     }

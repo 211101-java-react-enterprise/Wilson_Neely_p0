@@ -11,7 +11,6 @@ public class AccountsService implements DataService<Accounts>{
         accountsDAO = DAO;
     }
 
-    @Override
     public Accounts authenticate(Accounts account) {
         return null;
     }

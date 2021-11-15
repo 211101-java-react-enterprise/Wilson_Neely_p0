@@ -19,23 +19,15 @@ public class UsersService implements DataService<Users> {
         return sessionUser;
     }
 
-    @Override
-    public Users authenticate(Users user) {
-        return null;
-    }
 
     @Override
     public boolean register(Users user) {
         return false;
     }
 
-    @Override
-    public boolean validate(Users user) {
-        return false;
-    }
     public boolean registerNewUser(Users newUser) {
 
-        if (!isUserValid(newUser)) {
+        if (!validate(newUser)) {
             throw new InvalidRequestException("Invalid user data provided!");
         }
 
@@ -66,7 +58,7 @@ public class UsersService implements DataService<Users> {
 
     }
 
-    public void authenticateUser(String username, String password) {
+    public void authenticate(String username, String password) {
 
         if (username == null || username.trim().equals("") || password == null || password.trim().equals("")) {
             throw new InvalidRequestException("Invalid credential values provided!");
@@ -90,7 +82,8 @@ public class UsersService implements DataService<Users> {
         return sessionUser != null;
     }
 
-    public boolean isUserValid(Users user) {
+    @Override
+    public boolean validate(Users user) {
         if (user == null) return false;
         if (user.getFirstName() == null || user.getFirstName().trim().equals("")) return false;
         if (user.getLastName() == null || user.getLastName().trim().equals("")) return false;

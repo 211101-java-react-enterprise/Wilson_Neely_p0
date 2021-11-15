@@ -1,9 +1,12 @@
 package com.revature.project0.DAOs;
 
 import com.revature.project0.models.Accounts;
-import com.revature.project0.util.Collections.List;
+import com.revature.project0.util.Collections.LinkedList;
+
 
 public class AccountsDAO implements CrudDAO<Accounts>{
+
+
     @Override
     public Accounts save(Accounts newObj) {
         return null;
@@ -15,7 +18,7 @@ public class AccountsDAO implements CrudDAO<Accounts>{
     }
 
     @Override
-    public List<Accounts> findAll() {
+    public LinkedList<Accounts> findAll() {
         return null;
     }
 

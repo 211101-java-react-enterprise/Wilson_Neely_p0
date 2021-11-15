@@ -51,7 +51,7 @@ public class Register extends View {
         Users newUser = new Users(firstName,lastName,email,username,password);
 
         try {
-            usersService.registerNewUser(newUser);
+            usersService.register(newUser);
             router.navigate("/dashboard");
 
         }catch (InvalidRequestException | ResourcePersistenceException e){

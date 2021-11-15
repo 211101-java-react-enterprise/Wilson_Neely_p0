@@ -3,7 +3,9 @@ package com.revature.project0.util;
 import com.revature.project0.DAOs.AccountsDAO;
 import com.revature.project0.DAOs.TransactionDAO;
 import com.revature.project0.DAOs.UsersDAO;
+import com.revature.project0.render.screens.inner.Deposit;
 import com.revature.project0.render.screens.inner.LoggedIn;
+import com.revature.project0.render.screens.inner.Withdraw;
 import com.revature.project0.render.screens.outer.Login;
 import com.revature.project0.render.screens.outer.Register;
 import com.revature.project0.render.screens.outer.Welcome;
@@ -33,6 +35,8 @@ public class AppStatus {
         router.addScreen(new Login(consoleReader, router, usersService));
         router.addScreen(new Register(consoleReader, router, usersService));
         router.addScreen(new LoggedIn(consoleReader, router, usersService));
+        router.addScreen(new Deposit(consoleReader, router, usersService, accountsService));
+        router.addScreen(new Withdraw(consoleReader, router, usersService, accountsService));
 
     }
 

@@ -29,15 +29,19 @@ public class Deposit extends View {
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i < accountsList.size(); i++){
             sb.append(accountsList.get(i).getId() + " " + accountsList.get(i).getName());
-            if (i+1 != accountsList.size()){
-                sb.append(" ");
-            }
         }
         System.out.println(sb);
         System.out.println("Enter the account number");
         System.out.print("> ");
 
         String choice = consoleScanner.next();
-        //TODO finish this
+
+        System.out.println();
+        System.out.println("Enter the amount you would like to deposit");
+        System.out.print("> ");
+
+        String amt = consoleScanner.next();
+
+        accountsService.updateFunds(choice, amt, accountsList, true);
     }
 }

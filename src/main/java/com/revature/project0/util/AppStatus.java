@@ -29,8 +29,8 @@ public class AppStatus {
         TransactionsService transactionsService = new TransactionsService(transDAO);
         UsersService usersService = new UsersService(usersDAO);
         router.addScreen(new Welcome(consoleReader, router));
-        router.addScreen(new Login(consoleReader, router));
-        router.addScreen(new Register(consoleReader, router));
+        router.addScreen(new Login(consoleReader, router, usersService));
+        router.addScreen(new Register(consoleReader, router, usersService));
 
     }
 

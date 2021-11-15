@@ -10,8 +10,11 @@ import java.util.Scanner;
 
 public class Login extends View {
 
-    public Login(Scanner consoleScanner, ScreenRouter router) {
+    private final UsersService usersService;
+
+    public Login(Scanner consoleScanner, ScreenRouter router, UsersService usersService) {
         super("login", "/login", consoleScanner, router);
+        this.usersService = usersService;
     }
 
     @Override
@@ -24,10 +27,10 @@ public class Login extends View {
         System.out.println();
 
         try {
-            //TODO re-implement later
-            //UsersService.authenticateUser(username, password);
+            usersService.authenticateUser(username, password);
             router.navigate("/dashboard");
         } catch (InvalidRequestException | AuthenticationException e) {
+            //TODO logging
             System.out.println(e.getMessage());
         }
     }

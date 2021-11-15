@@ -11,8 +11,11 @@ import java.util.Scanner;
 
 public class Register extends View {
 
-    public Register(Scanner consoleScanner, ScreenRouter router) {
+    private final UsersService usersService;
+
+    public Register(Scanner consoleScanner, ScreenRouter router, UsersService usersService) {
         super("register", "/register", consoleScanner, router);
+        this.usersService = usersService;
     }
     @Override
     public void render() throws Exception {
@@ -45,17 +48,16 @@ public class Register extends View {
 
         System.out.printf("Provided user first and last name: { \"firstName\": %s, \"lastName\": %s}\n", firstName, lastName);
         // String format specifiers: %s (strings), %d (whole numbers), %f (decimal values)
-        //TODO re-implement later
-        //Users newUser = new Users(firstName,lastName,email,username,password);
+        Users newUser = new Users(firstName,lastName,email,username,password);
 
         try {
-            //TODO re-implement later
-            //UsersService.registerNewUser(newUser);
+            usersService.registerNewUser(newUser);
             router.navigate("/dashboard");
 
         }catch (InvalidRequestException | ResourcePersistenceException e){
             System.out.println(e.getMessage());
         } catch(Exception e){
+            //TODO logging
             System.out.println("There was an issue when trying to persist the user to the datasource.");
         }
     }

@@ -31,7 +31,7 @@ public class ConnectionFactory {
     private final Properties props = new Properties();
     private ConnectionFactory(){
         try {
-            props.load(new FileReader("src/main/Resource/DB.properties"));
+            props.load(new FileReader("src/Resource/DB.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }

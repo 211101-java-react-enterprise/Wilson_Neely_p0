@@ -1,5 +1,8 @@
 package com.revature.project0.util.Collections;
 
+import javax.swing.text.html.HTMLDocument;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 /**
@@ -8,7 +11,7 @@ import java.util.Objects;
  *
  * @param <T> the type of elements maintained by this list
  */
-public class LinkedList<T> implements List<T>, Deque<T> {
+public class LinkedList<T> implements List<T>, Deque<T>, Iterable<T> {
 
     private int size;
     private Node<T> head; // implicitly null
@@ -442,6 +445,30 @@ public class LinkedList<T> implements List<T>, Deque<T> {
         strBldr.append("]");
 
         return strBldr.toString();
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        Iterator<T> myIterator = new Iterator<T>() {
+
+            Node<T> current = head;
+
+            @Override
+            public boolean hasNext() {
+                return current != null;
+            }
+
+            @Override
+            public T next() {
+                if(!this.hasNext()){
+                    throw new NoSuchElementException();
+                }
+                T data = current.data;
+                current = current.nextNode;
+                return data;
+            }
+        };
+        return myIterator;
     }
 
     // Nested Inner Class

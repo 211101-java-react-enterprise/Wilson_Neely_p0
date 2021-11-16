@@ -24,7 +24,27 @@ public class AccountsDAO implements CrudDAO<Accounts>{
     }
 
     @Override
-    public Accounts save(Accounts newObj) {
+    public Accounts save(Accounts newAcc) {
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "insert into accounts (name, type, balance, creator) values (?, ?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, newAcc.getName());
+            pstmt.setString(2, newAcc.getType());
+            pstmt.setString(3, String.valueOf(newAcc.getBalance()));
+            pstmt.setString(2, newAcc.getCreator());
+
+            int rowsInserted = pstmt.executeUpdate();
+
+            if (rowsInserted != 0) {
+                return newAcc;
+            }
+
+        } catch (SQLException e) {
+            // TODO get a logger here
+            e.printStackTrace();
+
+        }
         return null;
     }
 

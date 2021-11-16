@@ -12,6 +12,17 @@ public class Accounts {
     private String creator;
     private LinkedList<String> accessors;
 
+    public Accounts(){
+        super();
+    }
+
+    public Accounts(String type, String name, String creator){
+        this.type = type;
+        this. name = name;
+        this.balance = 1.00f;
+        this.creator = creator;
+    }
+
     public int getId() {
         return id;
     }

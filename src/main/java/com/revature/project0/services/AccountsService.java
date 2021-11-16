@@ -1,6 +1,7 @@
 package com.revature.project0.services;
 
 import com.revature.project0.DAOs.AccountsDAO;
+import com.revature.project0.exceptions.ResourcePersistenceException;
 import com.revature.project0.models.Accounts;
 import com.revature.project0.util.Collections.LinkedList;
 
@@ -47,7 +48,11 @@ public class AccountsService implements DataService<Accounts>{
 
     @Override
     public boolean register(Accounts account) {
-        return false;
+        Accounts registeredAccount = accountsDAO.save(account);
+        if(registeredAccount == null){
+            throw new ResourcePersistenceException("The user could not be persisted to the datasource!");
+        }
+        return true;
     }
 
     @Override

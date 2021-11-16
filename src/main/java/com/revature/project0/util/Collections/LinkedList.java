@@ -449,7 +449,7 @@ public class LinkedList<T> implements List<T>, Deque<T>, Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        Iterator<T> myIterator = new Iterator<T>() {
+        return new Iterator<T>() {
 
             Node<T> current = head;
 
@@ -468,7 +468,6 @@ public class LinkedList<T> implements List<T>, Deque<T>, Iterable<T> {
                 return data;
             }
         };
-        return myIterator;
     }
 
     // Nested Inner Class

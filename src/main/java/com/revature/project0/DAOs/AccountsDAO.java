@@ -83,7 +83,7 @@ public class AccountsDAO implements CrudDAO<Accounts>{
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
             String sql = "SELECT * FROM accounts WHERE creator = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, "424a1f21-958c-454f-93c3-983e7842ba6e");
+            pstmt.setString(1, usersService.getSessionUser().getId());
             ResultSet rs = pstmt.executeQuery();
             LinkedList<Accounts> accList = new LinkedList<>();
             while(rs.next()) {
@@ -97,7 +97,7 @@ public class AccountsDAO implements CrudDAO<Accounts>{
                     acc.setAccessors(null);
                 }
                 //TODO: fix when have actual accessors on account
-                //acc.setAccessors(new LinkedList<String>(rs.getArray("accessors").toString().split()));
+                //else{acc.setAccessors(new LinkedList<String>(rs.getArray("accessors").toString().split()));}
                 accList.add(acc);
             }
             return accList;
@@ -116,6 +116,19 @@ public class AccountsDAO implements CrudDAO<Accounts>{
 
     @Override
     public boolean removeById(String id) {
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+            String sql = "DELETE FROM accounts WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, Integer.parseInt(id));
+            int rowsInserted = pstmt.executeUpdate();
+
+            if (rowsInserted != 0) {
+                return true;
+            }
+        }catch (SQLException e) {
+            // TODO get a logger here
+            e.printStackTrace();
+        }
         return false;
     }
 }

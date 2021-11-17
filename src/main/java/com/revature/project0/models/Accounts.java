@@ -88,4 +88,10 @@ public class Accounts {
     public int hashCode() {
         return Objects.hash(id, name, type, balance, creator, accessors);
     }
+
+    @Override
+    public String toString(){
+        return "Account ID: " + this.getId() + " , Account Name: " + this.getName() + " , Account Type: " +
+                this.getType() + " , Account Balance: " + this.getBalance();
+    }
 }

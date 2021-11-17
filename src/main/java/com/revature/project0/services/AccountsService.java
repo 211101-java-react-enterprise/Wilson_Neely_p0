@@ -64,4 +64,20 @@ public class AccountsService implements DataService<Accounts>{
     public boolean validate(Accounts account) {
         return false;
     }
+
+    public boolean validateDelete(LinkedList<Accounts> accs, String ans){
+        for (Accounts acc: accs) {
+            if(acc.getId() == Integer.parseInt(ans)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void remove(String id){
+        if(!accountsDAO.removeById(id)) {
+            System.out.println("There was a problem deleting the account");
+            throw new ResourcePersistenceException("Failed deletion");
+        }
+    }
 }

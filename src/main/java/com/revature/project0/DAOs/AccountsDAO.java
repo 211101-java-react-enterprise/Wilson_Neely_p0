@@ -31,8 +31,8 @@ public class AccountsDAO implements CrudDAO<Accounts>{
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, newAcc.getName());
             pstmt.setString(2, newAcc.getType());
-            pstmt.setString(3, String.valueOf(newAcc.getBalance()));
-            pstmt.setString(2, newAcc.getCreator());
+            pstmt.setFloat(3, newAcc.getBalance());
+            pstmt.setString(4, newAcc.getCreator());
 
             int rowsInserted = pstmt.executeUpdate();
 

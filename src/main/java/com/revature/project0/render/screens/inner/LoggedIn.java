@@ -12,7 +12,7 @@ public class LoggedIn extends View {
     private final UsersService usersService;
 
     public LoggedIn(Scanner consoleScanner, ScreenRouter router, UsersService usersService) {
-        super("loggedin", "loggedin", consoleScanner, router);
+        super("loggedin", "/loggedin", consoleScanner, router);
         this.usersService = usersService;
     }
 
@@ -26,7 +26,7 @@ public class LoggedIn extends View {
         }
         while (usersService.isSessionActive()){
             System.out.printf("\nLogged in as %s \n", sessionUser.getFirstName());
-            System.out.println("1) View/edit my bank accounts\n" +
+            System.out.print("1) View/edit my bank accounts\n" +
                     "2) Create a bank account\n" +
                     "3) View my transaction history\n" +
                     "4) Deposit into an account\n" +
@@ -35,7 +35,7 @@ public class LoggedIn extends View {
                     "7) Logout\n" +
                     "> ");
 
-            String selection = consoleScanner.next();
+            String selection = consoleScanner.nextLine();
             System.out.println();//for a newline after user input
 
             switch (selection) {

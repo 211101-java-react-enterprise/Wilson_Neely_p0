@@ -34,13 +34,13 @@ public class Deposit extends View {
         System.out.println("Enter the account number");
         System.out.print("> ");
 
-        String choice = consoleScanner.next();
+        String choice = consoleScanner.nextLine();
 
         System.out.println();
         System.out.println("Enter the amount you would like to deposit");
         System.out.print("> ");
 
-        String amt = consoleScanner.next();
+        String amt = consoleScanner.nextLine();
 
         accountsService.updateFunds(choice, amt, accountsList, true);
     }

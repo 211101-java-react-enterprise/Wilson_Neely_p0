@@ -29,21 +29,21 @@ public class Register extends View {
         System.out.println("Please provide us with some basic information.");
 
         System.out.print("What is your first name?\n> ");
-        firstName = consoleScanner.next();
+        firstName = consoleScanner.nextLine();
 
         System.out.print("\nWhat is your last name?\n> ");
-        lastName = consoleScanner.next();
+        lastName = consoleScanner.nextLine();
 
         System.out.print("\nWhat is your email?\n> ");
-        email = consoleScanner.next();
+        email = consoleScanner.nextLine();
 
         System.out.print("\nWhat is your username?\n> ");
-        username = consoleScanner.next();
+        username = consoleScanner.nextLine();
 
         System.out.print("\nWhat is your password?\n> ");
-        password = consoleScanner.next();
+        password = consoleScanner.nextLine();
 
-        System.out.print("\n");
+        System.out.println();
 
 
         System.out.printf("Provided user first and last name: { \"firstName\": %s, \"lastName\": %s}\n", firstName, lastName);

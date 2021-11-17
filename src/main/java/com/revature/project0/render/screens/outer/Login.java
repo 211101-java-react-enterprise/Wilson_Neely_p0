@@ -21,14 +21,14 @@ public class Login extends View {
     public void render() throws Exception {
         System.out.println("Please enter an existing username and password");
         System.out.print("USERNAME: ");
-        String username = consoleScanner.next();
+        String username = consoleScanner.nextLine();
         System.out.print("\nPASSWORD: ");
-        String password = consoleScanner.next();
+        String password = consoleScanner.nextLine();
         System.out.println();
 
         try {
             usersService.authenticate(username, password);
-            router.navigate("/dashboard");
+            router.navigate("/loggedin");
         } catch (InvalidRequestException | AuthenticationException e) {
             //TODO logging
             System.out.println(e.getMessage());

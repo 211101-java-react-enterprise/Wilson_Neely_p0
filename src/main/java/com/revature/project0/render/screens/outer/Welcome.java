@@ -14,13 +14,13 @@ public class Welcome extends View {
 
     @Override
     public void render() throws Exception {
-        System.out.println("Welcome to Wilson's Banking App\n" +
+        System.out.print("Welcome to Wilson's Banking App\n" +
                 "Would you like to:\n" +
                 "1. Login\n" +
                 "2. Register\n" +
                 "3. Exit\n" +
-                ">");
-        String ans = consoleScanner.next();
+                "> ");
+        String ans = consoleScanner.nextLine();
 
         switch (ans){
             case "1":

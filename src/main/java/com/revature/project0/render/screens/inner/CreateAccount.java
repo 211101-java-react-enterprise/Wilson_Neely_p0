@@ -27,7 +27,7 @@ public class CreateAccount extends View {
         do {
             System.out.println("The account types available to you are Checking or Savings. Enter Cancel to go back.");
             System.out.print("> ");
-            ans = consoleScanner.next();
+            ans = consoleScanner.nextLine();
             System.out.println();
             switch(ans){
                 case "Checking":
@@ -41,7 +41,7 @@ public class CreateAccount extends View {
             }
         }while(!corr);
         System.out.println("What would like like to name the account? (ex: Shared savings with brother) Max 50 chars.");
-        String name = consoleScanner.next();
+        String name = consoleScanner.nextLine();
         accountsService.register(new Accounts(ans, name, usersService.getSessionUser().getId()));
     }
 }

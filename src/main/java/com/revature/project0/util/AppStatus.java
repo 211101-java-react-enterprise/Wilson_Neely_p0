@@ -25,13 +25,13 @@ public class AppStatus {
         isRunning = true;
         router = new ScreenRouter();
         //Get what I need for resource injection
-        Scanner consoleReader = new Scanner(System.in);
-        AccountsDAO accountsDAO = new AccountsDAO();
-        TransactionDAO transDAO = new TransactionDAO();
         UsersDAO usersDAO = new UsersDAO();
+        UsersService usersService = new UsersService(usersDAO);
+        Scanner consoleReader = new Scanner(System.in);
+        AccountsDAO accountsDAO = new AccountsDAO(usersService);
+        TransactionDAO transDAO = new TransactionDAO();
         AccountsService accountsService = new AccountsService(accountsDAO);
         TransactionsService transactionsService = new TransactionsService(transDAO);
-        UsersService usersService = new UsersService(usersDAO);
         router.addScreen(new Welcome(consoleReader, router));
         router.addScreen(new Login(consoleReader, router, usersService));
         router.addScreen(new Register(consoleReader, router, usersService));

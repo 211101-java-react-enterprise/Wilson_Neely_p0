@@ -21,6 +21,7 @@ public class AccountsService implements DataService<Accounts>{
     public LinkedList<Accounts> findAll() {
         return accountsDAO.findAll();
     }
+
     public void updateFunds(String accountId, String amt, LinkedList<Accounts> accountsList, boolean dep){
 
         float amount = Float.parseFloat(amt.replaceAll("[^0-9.]",""));

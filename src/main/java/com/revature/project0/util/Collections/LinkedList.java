@@ -1,6 +1,5 @@
 package com.revature.project0.util.Collections;
 
-import javax.swing.text.html.HTMLDocument;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -16,6 +15,16 @@ public class LinkedList<T> implements List<T>, Deque<T>, Iterable<T> {
     private int size;
     private Node<T> head; // implicitly null
     private Node<T> tail = null; // you can explicitly declare them as null, but it's not required.
+
+    public LinkedList() {
+        super();
+    }
+
+    public LinkedList(T[] arr){
+        for (T s: arr) {
+            this.add(s);
+        }
+    }
 
     /**
      * Appends the specified element to the end of this list.

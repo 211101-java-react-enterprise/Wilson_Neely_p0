@@ -74,9 +74,10 @@ public class AccountsService implements DataService<Accounts>{
     public String transactionHistString(String id, String name){
         LinkedList<Transactions> trans = accountsDAO.transactionsList(Integer.parseInt(id));
         StringBuilder sb = new StringBuilder();
-        sb.append("Transaction amount   Transaction date\n");
+        sb.append("Viewing transactions for the account: " + name + " \n" +
+                "Transaction amount\t\t\tTransaction date\n");
         for (Transactions t: trans) {
-            sb.append(t.getAmount() + "     " + t.getDate() + "\n");
+            sb.append("$" + t.getAmount() + "\t\t\t\t\t" + t.getDate() + "\n");
         }
         sb.delete(sb.length()-2, sb.length());
         return sb.toString();

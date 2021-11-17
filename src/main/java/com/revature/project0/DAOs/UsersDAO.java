@@ -12,7 +12,7 @@ import java.util.UUID;
 
 public class UsersDAO implements CrudDAO<Users> {
     public Users findUserByUsername(String username) {
-
+        //find by Username
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             String sql = "select * from users where username = ?";
@@ -39,7 +39,7 @@ public class UsersDAO implements CrudDAO<Users> {
     }
 
     public Users findUserByEmail(String email) {
-
+        //find by email
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             String sql = "select * from users where email = ?";
@@ -66,7 +66,7 @@ public class UsersDAO implements CrudDAO<Users> {
     }
 
     public Users findUserByUsernameAndPassword(String username, String password) {
-
+        //find user by username and password, does what it says on the tin
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             String sql = "select * from users where username = ? and password = ?";
@@ -96,7 +96,7 @@ public class UsersDAO implements CrudDAO<Users> {
 
     @Override
     public Users save(Users newUser) {
-
+        //attempts to persist user to db
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             newUser.setId(UUID.randomUUID().toString());

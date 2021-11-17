@@ -16,12 +16,13 @@ public class UsersService implements DataService<Users> {
     }
 
     public Users getSessionUser() {
+        //session user is the user that is logged in, this is injected in multiple places as needed
         return sessionUser;
     }
 
     @Override
     public boolean register(Users newUser) {
-
+        //registration and validation checks before attempting to persist to db
         if (!validate(newUser)) {
             throw new InvalidRequestException("Invalid user data provided!");
         }

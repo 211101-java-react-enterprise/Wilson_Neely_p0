@@ -16,11 +16,14 @@ public class AccountsService implements DataService<Accounts>{
     }
 
     public LinkedList<Accounts> findAll() {
+        //segway to dao function
         return accountsDAO.findAll();
     }
 
     public void updateFunds(String accountId, String amt, LinkedList<Accounts> accountsList, boolean dep){
-
+        //updates the amount field for an associated account
+        //dep is used to determine if this is a deposit or withdrawal
+        //dep = true is deposit
         float amount = Float.parseFloat(amt.replaceAll("[^0-9.]",""));
 
         if (amount <= 0){
@@ -50,6 +53,7 @@ public class AccountsService implements DataService<Accounts>{
 
     @Override
     public boolean register(Accounts account) {
+        //attempts to register an account to the db
         Accounts registeredAccount = accountsDAO.save(account);
         if(registeredAccount == null){
             throw new ResourcePersistenceException("The user could not be persisted to the datasource!");
@@ -63,6 +67,7 @@ public class AccountsService implements DataService<Accounts>{
     }
 
     public boolean accIdInList(LinkedList<Accounts> accs, String ans){
+        //checks to see if the account id is present in a list of accounts
         for (Accounts acc: accs) {
             if(acc.getId() == Integer.parseInt(ans)){
                 return true;
@@ -72,6 +77,7 @@ public class AccountsService implements DataService<Accounts>{
     }
 
     public String transactionHistString(String id, String name){
+        //Provides a formatted string for the TransactionHist screen
         LinkedList<Transactions> trans = accountsDAO.transactionsList(Integer.parseInt(id));
         StringBuilder sb = new StringBuilder();
         sb.append("Viewing transactions for the account: " + name + " \n" +
@@ -84,6 +90,7 @@ public class AccountsService implements DataService<Accounts>{
     }
 
     public void remove(String id){
+        //removes an account by id and catches related errors
         if(!accountsDAO.removeById(id)) {
             System.out.println("There was a problem deleting the account");
             throw new ResourcePersistenceException("Failed deletion");

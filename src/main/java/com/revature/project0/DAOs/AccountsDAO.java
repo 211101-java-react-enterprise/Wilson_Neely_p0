@@ -24,13 +24,14 @@ public class AccountsDAO implements CrudDAO<Accounts>{
     }
 
     public void deposit(String accountId, float amount){
+        //updates the balance, checks if it will overdraw
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
             String sql = "SELECT balance FROM accounts WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, Integer.parseInt(accountId));
             ResultSet rs = pstmt.executeQuery();
             rs.next();
-            if (rs.getFloat("balance") + amount <= 0){
+            if (rs.getFloat("balance") + amount < 0){
                 throw new ResourcePersistenceException("Attempt to overdraw balance");
             }
             sql = "insert into solo_transactions (account, amount) values (?, ?)";
@@ -51,6 +52,7 @@ public class AccountsDAO implements CrudDAO<Accounts>{
 
     @Override
     public Accounts save(Accounts newAcc) {
+        //new account persistence
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             String sql = "insert into accounts (name, type, balance, creator) values (?, ?, ?, ?)";
@@ -81,6 +83,7 @@ public class AccountsDAO implements CrudDAO<Accounts>{
 
     @Override
     public LinkedList<Accounts> findAll() {
+        //finds all accounts from the creator uuid and returns them in a list
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
             String sql = "SELECT * FROM accounts WHERE creator = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -117,6 +120,7 @@ public class AccountsDAO implements CrudDAO<Accounts>{
 
     @Override
     public boolean removeById(String id) {
+        //account deletion, removes the associated transactions first, then the account
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
             String sql = "DELETE FROM solo_transactions WHERE account = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -142,6 +146,7 @@ public class AccountsDAO implements CrudDAO<Accounts>{
         return false;
     }
     public LinkedList<Transactions> transactionsList(int accID){
+        //returns a list of transactions to be parsed into a string
         LinkedList<Transactions> list = new LinkedList<>();
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
             String sql = "SELECT * FROM solo_transactions WHERE account = ?";

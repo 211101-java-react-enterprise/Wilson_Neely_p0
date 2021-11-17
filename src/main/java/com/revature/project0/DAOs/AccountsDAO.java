@@ -117,10 +117,19 @@ public class AccountsDAO implements CrudDAO<Accounts>{
     @Override
     public boolean removeById(String id) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-            String sql = "DELETE FROM accounts WHERE id = ?";
+            String sql = "DELETE FROM solo_transactions WHERE account = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, Integer.parseInt(id));
             int rowsInserted = pstmt.executeUpdate();
+
+            if (rowsInserted == 0) {
+                return false;
+            }
+
+            sql = "DELETE FROM accounts WHERE id = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, Integer.parseInt(id));
+            rowsInserted = pstmt.executeUpdate();
 
             if (rowsInserted != 0) {
                 return true;

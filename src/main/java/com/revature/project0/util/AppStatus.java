@@ -37,6 +37,7 @@ public class AppStatus {
         router.addScreen(new Withdraw(consoleReader, router, usersService, accountsService));
         router.addScreen(new CreateAccount(consoleReader, router, usersService, accountsService));
         router.addScreen(new AccountView(consoleReader, router, usersService, accountsService));
+        router.addScreen(new TransactionHist(consoleReader, router, usersService, accountsService));
 
     }
 

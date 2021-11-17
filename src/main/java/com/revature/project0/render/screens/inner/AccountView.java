@@ -44,7 +44,7 @@ public class AccountView extends View {
                     System.out.print("What account do you wish to delete?\n> ");
                     ans =  consoleScanner.nextLine();
                     System.out.println();
-                    if(accountsService.validateDelete(acc, ans)){
+                    if(accountsService.accIdInList(acc, ans)){
                         accountsService.remove(ans);
                     }break;
                 case "3":

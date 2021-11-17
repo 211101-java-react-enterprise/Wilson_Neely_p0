@@ -2,6 +2,7 @@ package com.revature.project0.DAOs;
 
 import com.revature.project0.exceptions.ResourcePersistenceException;
 import com.revature.project0.models.Accounts;
+import com.revature.project0.models.Transactions;
 import com.revature.project0.services.UsersService;
 import com.revature.project0.util.Collections.LinkedList;
 import com.revature.project0.util.DataSource.ConnectionFactory;
@@ -139,5 +140,27 @@ public class AccountsDAO implements CrudDAO<Accounts>{
             e.printStackTrace();
         }
         return false;
+    }
+    public LinkedList<Transactions> transactionsList(int accID){
+        LinkedList<Transactions> list = new LinkedList<>();
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+            String sql = "SELECT * FROM solo_transactions WHERE account = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, accID);
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()){
+                Transactions t = new Transactions();
+                t.setId(rs.getInt("id"));
+                t.setAccount(rs.getInt("account"));
+                t.setAmount(rs.getFloat("amount"));
+                t.setDate(rs.getDate("time_date"));
+                list.add(t);
+            }
+            return list;
+        }catch (SQLException e) {
+            // TODO get a logger here
+            e.printStackTrace();
+        }
+        return null;
     }
 }

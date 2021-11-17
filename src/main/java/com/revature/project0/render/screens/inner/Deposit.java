@@ -28,7 +28,7 @@ public class Deposit extends View {
         LinkedList<Accounts> accountsList = accountsService.findAll();
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i < accountsList.size(); i++){
-            sb.append(accountsList.get(i).getId() + " " + accountsList.get(i).getName());
+            sb.append(accountsList.get(i).getId() + " " + accountsList.get(i).getName() + " ");
         }
         System.out.println(sb);
         System.out.println("Enter the account number");

@@ -3,6 +3,7 @@ package com.revature.project0.services;
 import com.revature.project0.DAOs.AccountsDAO;
 import com.revature.project0.exceptions.ResourcePersistenceException;
 import com.revature.project0.models.Accounts;
+import com.revature.project0.models.Transactions;
 import com.revature.project0.util.Collections.LinkedList;
 
 
@@ -12,10 +13,6 @@ public class AccountsService implements DataService<Accounts>{
 
     public AccountsService(AccountsDAO DAO) {
         accountsDAO = DAO;
-    }
-
-    public Accounts authenticate(Accounts account) {
-        return null;
     }
 
     public LinkedList<Accounts> findAll() {
@@ -65,13 +62,24 @@ public class AccountsService implements DataService<Accounts>{
         return false;
     }
 
-    public boolean validateDelete(LinkedList<Accounts> accs, String ans){
+    public boolean accIdInList(LinkedList<Accounts> accs, String ans){
         for (Accounts acc: accs) {
             if(acc.getId() == Integer.parseInt(ans)){
                 return true;
             }
         }
         return false;
+    }
+
+    public String transactionHistString(String id, String name){
+        LinkedList<Transactions> trans = accountsDAO.transactionsList(Integer.parseInt(id));
+        StringBuilder sb = new StringBuilder();
+        sb.append("Transaction amount   Transaction date\n");
+        for (Transactions t: trans) {
+            sb.append(t.getAmount() + "     " + t.getDate() + "\n");
+        }
+        sb.delete(sb.length()-2, sb.length());
+        return sb.toString();
     }
 
     public void remove(String id){

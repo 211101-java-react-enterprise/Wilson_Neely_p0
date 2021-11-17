@@ -46,7 +46,7 @@ public class LoggedIn extends View {
                     router.navigate("loggedin/createaccount");
                     break;
                 case "3":
-                    router.navigate("/flashcards");
+                    router.navigate("loggedin/transactionhistory");
                     break;
                 case "4":
                     router.navigate("loggedin/deposit");

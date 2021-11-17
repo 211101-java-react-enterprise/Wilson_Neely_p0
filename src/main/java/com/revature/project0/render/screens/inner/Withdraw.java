@@ -37,7 +37,7 @@ public class Withdraw extends View {
         String choice = consoleScanner.nextLine();
 
         System.out.println();
-        System.out.println("Enter the amount you would like to deposit");
+        System.out.println("Enter the amount you would like to withdraw");
         System.out.print("> ");
 
         String amt = consoleScanner.nextLine();

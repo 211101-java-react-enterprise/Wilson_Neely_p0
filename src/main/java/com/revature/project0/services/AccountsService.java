@@ -37,10 +37,14 @@ public class AccountsService implements DataService<Accounts>{
             }
         }
         if(idFound){
-            if(dep) {
-                accountsDAO.deposit(accountId, amount);
-            } else{
-                accountsDAO.deposit(accountId, -amount);
+            try {
+                if (dep) {
+                    accountsDAO.deposit(accountId, amount);
+                } else {
+                    accountsDAO.deposit(accountId, -amount);
+                }
+            }catch (ResourcePersistenceException e){
+                System.out.println("That amount would overdraw your account, try again.");
             }
         }else{
             System.out.println("Invalid account ID");

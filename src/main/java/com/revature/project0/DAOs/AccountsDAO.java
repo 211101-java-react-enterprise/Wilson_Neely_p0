@@ -1,5 +1,6 @@
 package com.revature.project0.DAOs;
 
+import com.revature.project0.exceptions.ResourcePersistenceException;
 import com.revature.project0.models.Accounts;
 import com.revature.project0.services.UsersService;
 import com.revature.project0.util.Collections.LinkedList;
@@ -23,8 +24,16 @@ public class AccountsDAO implements CrudDAO<Accounts>{
 
     public void deposit(String accountId, float amount){
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-            String sql = "insert into solo_transactions (account, amount) values (?, ?)";
+            String sql = "SELECT balance FROM accounts WHERE id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, Integer.parseInt(accountId));
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            if (rs.getFloat("balance") + amount <= 0){
+                throw new ResourcePersistenceException("Attempt to overdraw balance");
+            }
+            sql = "insert into solo_transactions (account, amount) values (?, ?)";
+            pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, Integer.parseInt(accountId));
             pstmt.setFloat(2, amount);
             pstmt.executeUpdate();
